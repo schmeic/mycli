@@ -489,7 +489,7 @@ class SQLCompleter(Completer):
             elif suggestion['type'] == 'keyword':
                 keywords = self.find_matches(text, self.keywords,
                                              start_only=True,
-                                             fuzzy=False,
+                                             fuzzy=True,
                                              casing=self.keyword_casing)
                 matches.update(keywords)
 
