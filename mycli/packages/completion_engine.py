@@ -284,9 +284,18 @@ def suggest_based_on_last_token(token, text_before_cursor, full_text, identifier
             return suggest_based_on_last_token(
                 prev_keyword, text_before_cursor, full_text, identifier)
         else:
-            return []
+            tables = extract_tables(full_text)  # [(schema, table, alias), ...]
+            return [{'type': 'column', 'tables': tables},
+                    {'type': 'function', 'schema': []},
+                    {'type': 'keyword'}]
+            # return []
     else:
-        return [{'type': 'keyword'}]
+        # return [{'type': 'keyword'}]
+        tables = extract_tables(full_text)  # [(schema, table, alias), ...]
+        return [{'type': 'column', 'tables': tables}, 
+                {'type': 'function', 'schema': []},
+                {'type': 'keyword'}]
+
 
 
 def identifies(id, schema, table, alias):
